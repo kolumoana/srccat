@@ -211,7 +211,7 @@ func shouldExclude(name, relativePath string, matcher gitignore.Matcher) bool {
 		".json", ".log", ".bak", "~", ".DS_Store",
 		"package-lock.json", "yarn.lock", ".d.ts", "config.mjs",
 		".lock.hcl", ".ico", ".tfstate",
-		".backup", ".pptx", ".ppt", ".doc", ".docx", ".xls", ".xlsx",
+		".backup", ".pptx", ".ppt", ".doc", ".docx", ".xls", ".xlsx", ".mod", ".sum",
 	}
 	for _, pattern := range excludedPatterns {
 		if strings.HasSuffix(name, pattern) {
@@ -264,7 +264,7 @@ func outputText(files []FileContent) error {
 
 func outputList(files []FileContent) error {
 	for _, file := range files {
-		fmt.Println(file.Path)
+		fmt.Printf("- %s\n", file.Path)
 	}
 	return nil
 }
