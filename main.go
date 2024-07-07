@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"sync"
 	"time"
@@ -26,6 +27,12 @@ type FileContent struct {
 }
 
 var customExcludePatterns []glob.Glob
+
+func sortFileContents(files []FileContent) {
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].Path < files[j].Path
+	})
+}
 
 func main() {
 	app := &cli.App{
@@ -152,6 +159,8 @@ func listFiles(baseDir, format string) error {
 	wg.Wait()
 	close(progressChan)
 	<-doneChan
+
+	sortFileContents(files)
 
 	switch format {
 	case "json":
