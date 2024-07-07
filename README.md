@@ -15,7 +15,7 @@
 ## インストール
 
 ```
-go install github.com/yourusername/srccat
+go install github.com/kolumoana/srccat
 ```
 
 ## 使用方法
